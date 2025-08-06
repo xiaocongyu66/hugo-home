@@ -328,10 +328,8 @@
      
     
         
-    
-<div id="tcomment" class="js-Pjax comment"></div>
-
-
+    <script src="//cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
+<div id="tcomment"></div>
 <style>
     .twikoo {
         background-color: var(--card-background);
@@ -369,73 +367,10 @@
         background-color: var(--body-background) !important;
         color: var(--body-text-color) !important;
     }
-</style>
-
-
-<script>
-    
-    const pjax = new Pjax({
-        selectors: [
-            
-            ".js-Pjax"  
-        ]
-    });
-    
-    
-    function initTwikoo() {
-        
-        const commentContainer = document.getElementById('tcomment');
-        if (!commentContainer) return;
-        
-        
-        commentContainer.innerHTML = '';
-        
-        
-        if (typeof twikoo !== 'undefined') {
-            twikoo.init({
-                envId: 'https:\/\/twikoo.congyu.dpdns.org',
-                el: '#tcomment',}).catch(error => {
-                console.error('Twikoo 初始化失败:', error);
-            });
-        } else {
-            console.warn('Twikoo 库未加载，正在重试...');
-            loadTwikooScript();
-        }
-    }
-    
-    
-    function loadTwikooScript() {
-        if (typeof twikoo !== 'undefined') return;
-        
-        const script = document.createElement('script');
-        script.src = '//cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js';
-        script.onload = initTwikoo;
-        script.onerror = () => console.error('Twikoo 脚本加载失败');
-        document.head.appendChild(script);
-    }
-    
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        if (document.getElementById('tcomment')) {
-            loadTwikooScript();
-        }
-    });
-    
-    
-    document.addEventListener('pjax:complete', function() {
-        
-        setTimeout(() => {
-            if (document.getElementById('tcomment')) {
-                initTwikoo();
-            }
-        }, 300);
-    });
-    
-    
-    window.addEventListener('popstate', function() {
-        setTimeout(initTwikoo, 100);
-    });
+</style><script>
+    twikoo.init({
+        envId: 'https:\/\/twikoo.congyu.dpdns.org',
+        el: '#tcomment',})
 </script>
 
     
@@ -575,7 +510,7 @@
             ".main-container"
         ]
     })
-    
+
     pjax._handleResponse = pjax.handleResponse;
     
     pjax.handleResponse = function(responseText, request, href, options) {
@@ -599,30 +534,6 @@
         window.Stack.init();
     })
 </script>
-
-
-<script>
-    var pjax = new Pjax({
-        selectors: [
-            ...
-            ".js-Pjax"
-        ]
-    })
-</script>
-<div class="js-Pjax">
-    <script>
-        
-        (function() {
-            let script = twikoo.createElement('script');
-            
-             script.setAttribute('key', 'value');
-            ...
-            
-            document.querySelector('xxx').appendchild(script)
-        })(document)
-    </script>
-<div>
-
 <script>
     async function renderKaTeX() {
         

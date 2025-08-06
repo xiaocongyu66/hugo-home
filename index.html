@@ -693,7 +693,7 @@
             ".main-container"
         ]
     })
-    
+
     pjax._handleResponse = pjax.handleResponse;
     
     pjax.handleResponse = function(responseText, request, href, options) {
@@ -717,30 +717,6 @@
         window.Stack.init();
     })
 </script>
-
-
-<script>
-    var pjax = new Pjax({
-        selectors: [
-            ...
-            ".js-Pjax"
-        ]
-    })
-</script>
-<div class="js-Pjax">
-    <script>
-        
-        (function() {
-            let script = twikoo.createElement('script');
-            
-             script.setAttribute('key', 'value');
-            ...
-            
-            document.querySelector('xxx').appendchild(script)
-        })(document)
-    </script>
-<div>
-
 <script>
     async function renderKaTeX() {
         
