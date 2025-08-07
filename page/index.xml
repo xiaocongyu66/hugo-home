@@ -7,8 +7,8 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>丛雨啊啊啊</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 22:33:36 +0800</lastBuildDate><atom:link href="https://hugo.congyu.dpdns.org/page/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>归档</title>
+        <lastBuildDate>Fri, 08 Aug 2025 01:49:54 +0800</lastBuildDate><atom:link href="https://hugo.congyu.dpdns.org/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>归档 | archives</title>
         <link>https://hugo.congyu.dpdns.org/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
@@ -16,16 +16,16 @@
         <description></description>
         </item>
         <item>
-        <title>关于</title>
-        <link>https://hugo.congyu.dpdns.org/%E5%85%B3%E4%BA%8E/</link>
+        <title>关于 | About</title>
+        <link>https://hugo.congyu.dpdns.org/%E5%85%B3%E4%BA%8E-about/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://hugo.congyu.dpdns.org/%E5%85%B3%E4%BA%8E/</guid>
+        <guid>https://hugo.congyu.dpdns.org/%E5%85%B3%E4%BA%8E-about/</guid>
         <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
 </description>
         </item>
         <item>
-        <title>搜索</title>
+        <title>搜索 | search</title>
         <link>https://hugo.congyu.dpdns.org/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
@@ -33,11 +33,11 @@
         <description></description>
         </item>
         <item>
-        <title>友情链接</title>
-        <link>https://hugo.congyu.dpdns.org/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</link>
+        <title>友链 | link</title>
+        <link>https://hugo.congyu.dpdns.org/%E5%8F%8B%E9%93%BE-link/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://hugo.congyu.dpdns.org/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</guid>
+        <guid>https://hugo.congyu.dpdns.org/%E5%8F%8B%E9%93%BE-link/</guid>
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
