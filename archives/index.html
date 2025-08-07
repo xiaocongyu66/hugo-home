@@ -479,19 +479,6 @@
         document.head.appendChild(customFont);
     }());
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-
-<meting-js
-	server="netease"
-	type="playlist"
-	id="60198"
-	lrcType="3"
-	fixed="true">
-</meting-js>
-
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 
@@ -546,6 +533,65 @@
         topbar.hide();
     })
 </script>
+
+<script>
+    
+    const cssPath = "https://hugo.congyu.dpdns.org/waifu/waifu.css"
+    const tipsJsonPath = "https://hugo.congyu.dpdns.org/waifu/waifu-tips.json"
+    
+    const live2d_path = "https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/";
+
+    
+    function loadExternalResource(url, type) {
+        return new Promise((resolve, reject) => {
+            let tag;
+            if (type === "css") {
+                tag = document.createElement("link");
+                tag.rel = "stylesheet";
+                tag.href = url;
+            }
+            else if (type === "js") {
+                tag = document.createElement("script");
+                tag.src = url;
+            }
+            if (tag) {
+                tag.onload = () => resolve(url);
+                tag.onerror = () => reject(url);
+                document.head.appendChild(tag);
+            }
+        });
+    }
+
+    
+    if (screen.width >= 768) {
+        Promise.all([
+            loadExternalResource(cssPath, "css"),
+            loadExternalResource(live2d_path + "live2d.min.js", "js"),
+            loadExternalResource(live2d_path + "waifu-tips.js", "js")
+        ]).then(() => {
+            
+            initWidget({
+                waifuPath: tipsJsonPath,
+                cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/",
+                tools: ["hitokoto", "asteroids", "switch-model", "switch-texture", "photo", "info", "quit"]
+            });
+        });
+    }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+<meting-js
+	server="netease"
+	type="playlist"
+	id="60198"
+	lrcType="3"
+	fixed="true">
+</meting-js>
+
 <script>
     async function renderKaTeX() {
         
@@ -582,72 +628,6 @@
     })
 </script>
 
-<script>
-  const cdnPath = "https://fastly.jsdelivr.net/gh/xiaocongyu66/live2d-widget-v3@main";
-  const localPath = "/live2d";
-  
-  const config = {
-    
-    path: {
-      homePath: "/",
-      modelPath: cdnPath + "/Resources/",
-      cssPath: localPath + "/waifu.css",
-      tipsJsonPath: localPath + "/waifu-tips.json",
-      tipsJsPath: cdnPath + "/waifu-tips.js",
-      live2dCorePath: cdnPath + "/Core/live2dcubismcore.js",
-      live2dSdkPath: cdnPath + "/live2d-sdk.js"
-    },
-    
-    tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
-    
-    drag: {
-      enable: true,
-      direction: ["x", "y"]
-    },
-    
-    switchType: "order"
-  }
-
-  
-  if (screen.width >= 768) {
-    Promise.all([
-      loadExternalResource(config.path.cssPath, "css"),
-      loadExternalResource(config.path.live2dCorePath, "js"),
-      loadExternalResource(config.path.live2dSdkPath, "js"),
-      loadExternalResource(config.path.tipsJsPath, "js")
-    ]).then(() => {
-      initWidget({
-        waifuPath: config.path.tipsJsonPath,
-        cdnPath: config.path.modelPath,
-        tools: config.tools,
-        dragEnable: config.drag.enable,
-        dragDirection: config.drag.direction,
-        switchType: config.switchType
-      });
-    });
-  }
-
-  
-  function loadExternalResource(url, type) {
-    return new Promise((resolve, reject) => {
-      let tag;
-      if (type === "css") {
-        tag = document.createElement("link");
-        tag.rel = "stylesheet";
-        tag.href = url;
-      }
-      else if (type === "js") {
-        tag = document.createElement("script");
-        tag.src = url;
-      }
-      if (tag) {
-        tag.onload = () => resolve(url);
-        tag.onerror = () => reject(url);
-        document.head.appendChild(tag);
-      }
-    });
-  }
-</script>
 
     </body>
 </html>
