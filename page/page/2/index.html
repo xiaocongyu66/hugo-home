@@ -453,12 +453,16 @@
     pjax.handleResponse = function(responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
+                
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                
                 let bodyClass = newDom.body.className;
                 document.body.setAttribute("class", bodyClass);
             }
+            
             pjax._handleResponse(responseText, request, href, options);
         } else {
+            
             console.warn('Non-HTML response received');
         }
     };
@@ -466,134 +470,14 @@
     
     topbar.config({
         barColors: {
-            '0': 'rgba(255, 255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234, 1)'
+            '0': 'rgba(255, 255, 255, 1)', 
+            '1.0': 'rgba(0, 149, 234, 1)' 
         }
     });
-    
-    
-    window.commentManager = {
-        isInitialized: false,
-        currentInstance: null,
-        
-        
-        destroy: function() {
-            if (this.currentInstance && window.twikoo) {
-                try {
-                    
-                    const container = document.getElementById('tcomment');
-                    if (container) {
-                        container.innerHTML = '';
-                    }
-                    
-                    this.currentInstance = null;
-                    this.isInitialized = false;
-                    console.log('评论实例已销毁');
-                } catch (error) {
-                    console.error('销毁评论实例时出错:', error);
-                }
-            }
-        },
-        
-        
-        init: function() {
-            const commentContainer = document.getElementById('tcomment');
-            if (!commentContainer) {
-                console.log('评论容器不存在，跳过评论初始化');
-                return;
-            }
-            
-            
-            if (this.isInitialized) {
-                this.destroy();
-            }
-            
-            console.log('开始初始化评论...');
-            
-            
-            if (window.twikoo && typeof window.twikoo.init === 'function') {
-                this.initializeTwikoo();
-                return;
-            }
-            
-            
-            this.loadTwikooScript();
-        },
-        
-        
-        loadTwikooScript: function() {
-            
-            const existingScript = document.querySelector('script[src*="twikoo"]');
-            if (existingScript) {
-                
-                if (window.twikoo) {
-                    this.initializeTwikoo();
-                } else {
-                    
-                    existingScript.addEventListener('load', () => {
-                        this.initializeTwikoo();
-                    });
-                }
-                return;
-            }
-            
-            
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js';
-            script.async = true;
-            
-            script.onload = () => {
-                console.log('Twikoo 脚本加载完成');
-                this.initializeTwikoo();
-            };
-            
-            script.onerror = () => {
-                console.error('Twikoo 脚本加载失败');
-            };
-            
-            document.head.appendChild(script);
-        },
-        
-        
-        initializeTwikoo: function() {
-            if (!window.twikoo || typeof window.twikoo.init !== 'function') {
-                console.error('Twikoo 未正确加载');
-                return;
-            }
-            
-            const commentContainer = document.getElementById('tcomment');
-            if (!commentContainer) {
-                console.log('评论容器不存在，跳过 Twikoo 初始化');
-                return;
-            }
-            
-            console.log('开始 Twikoo 初始化...');
-            
-            
-            commentContainer.innerHTML = '';
-            
-            window.twikoo.init({
-                envId: 'https://twikoo.congyu.dpdns.org',
-                el: '#tcomment',
-                lang: 'zh-CN'
-            }).then(() => {
-                console.log('Twikoo 评论初始化成功');
-                this.isInitialized = true;
-                this.currentInstance = window.twikoo;
-            }).catch((err) => {
-                console.error('Twikoo 评论初始化失败: ', err);
-                this.isInitialized = false;
-                this.currentInstance = null;
-            });
-        }
-    };
-    
     
     document.addEventListener('pjax:send', () => {
         
         topbar.show();
-        
-        window.commentManager.destroy();
     });
     
     document.addEventListener('pjax:complete', () => {
@@ -602,131 +486,47 @@
             window.Stack.init();
         }
         
-        
         topbar.hide();
-        
-        
-        setTimeout(() => {
-            window.commentManager.init();
-        }, 500);
     });
-    
+
     
     document.addEventListener('DOMContentLoaded', function() {
         
         if (window.Stack && typeof window.Stack.init === 'function') {
             window.Stack.init();
         }
-        
-        
-        setTimeout(() => {
-            window.commentManager.init();
-        }, 800);
     });
-    
-    
-    document.addEventListener('visibilitychange', function() {
-        if (!document.hidden) {
-            setTimeout(() => {
-                const commentContainer = document.getElementById('tcomment');
-                if (commentContainer && !window.commentManager.isInitialized) {
-                    window.commentManager.init();
-                }
-            }, 300);
+</script><div class="js-Pjax">
+<script>
+    (function () {
+        
+        let comment = document.querySelector(".comment");
+        if (!comment) {
+            return
         }
-    });
+        let script = document.createElement('script');
+        
+        script.setAttribute('src', 'https://giscus.app/client.js');
+        script.setAttribute('data-repo', 'xiaocongyu66/supreme-octo-winner');
+        script.setAttribute('data-repo-id', 'R_kgDOQVticQ');
+        script.setAttribute('data-category', 'Announcements');
+        script.setAttribute('data-category-id', 'DIC_kwDOQVticc4CxymN');
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-strict', '0');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'top');
+        script.setAttribute('data-theme', 'preferred_color_scheme');
+        script.setAttribute('data-lang', 'zh-CN');
+        script.setAttribute('data-loading', 'lazy');
+        script.setAttribute('crossorigin', 'anonymous');
+        
+        script.async = true;
+        
+        document.querySelector('.site-footer').before(script)
+    })(document);
 </script>
-
-
-<div class="js-Pjax">
-    <script context="inline">
-        
-        function initComments() {
-            
-            const commentContainer = document.getElementById('tcomment');
-            if (!commentContainer) {
-                console.log('评论容器不存在，跳过评论初始化');
-                return;
-            }
-            
-            console.log('开始初始化评论...');
-            
-            
-            const existingScripts = document.querySelectorAll('script[src*="twikoo"]');
-            existingScripts.forEach(script => {
-                script.remove();
-            });
-            
-            
-            if (window.twikoo && typeof window.twikoo.init === 'function') {
-                console.log('Twikoo 已加载，直接初始化');
-                initializeTwikoo();
-                return;
-            }
-            
-            
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js';
-            script.async = true;
-            
-            script.onload = function() {
-                console.log('Twikoo 脚本加载完成');
-                initializeTwikoo();
-            };
-            
-            script.onerror = function() {
-                console.error('Twikoo 脚本加载失败');
-            };
-            
-            document.head.appendChild(script);
-        }
-        
-        
-        function initializeTwikoo() {
-            if (!window.twikoo || typeof window.twikoo.init !== 'function') {
-                console.error('Twikoo 未正确加载');
-                return;
-            }
-            
-            console.log('开始 Twikoo 初始化...');
-            
-            window.twikoo.init({
-                envId: 'https://twikoo.congyu.dpdns.org',
-                el: '#tcomment',
-                lang: 'zh-CN'
-            }).then(function() {
-                console.log('Twikoo 评论初始化成功');
-            }).catch(function(err) {
-                console.error('Twikoo 评论初始化失败: ', err);
-            });
-        }
-
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            setTimeout(initComments, 300);
-        });
-        
-        
-        document.addEventListener('pjax:complete', function() {
-            
-            setTimeout(initComments, 100);
-        });
-        
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const jsPjaxContainer = document.querySelector('.js-Pjax');
-            if (jsPjaxContainer) {
-                const links = jsPjaxContainer.querySelectorAll('a');
-                links.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                    });
-                });
-            }
-        });
-    </script>
-</div>
+<div>
 <script>
     async function renderKaTeX() {
         
